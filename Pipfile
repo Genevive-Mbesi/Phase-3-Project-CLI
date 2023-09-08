@@ -6,6 +6,9 @@ name = "pypi"
 [packages]
 alembic = "*"
 sqlalchemy = "*"
+click = "*"
+pipenv = "*"
+shell = "*"
 
 [dev-packages]
 
