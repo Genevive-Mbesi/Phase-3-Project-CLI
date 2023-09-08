@@ -1,5 +1,5 @@
 import click
-from inventory.models.model import Product  
+from models.model import Product  
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
@@ -11,7 +11,7 @@ def cli():
 def list_products():
     """List all products in the inventory."""
     # Create an SQLAlchemy engine and session
-    engine = create_engine('sqlite:///inventory.db')  # Change to your database connection
+    engine = create_engine('sqlite:///inventory.db') 
     Session = sessionmaker(bind=engine)
     session = Session()
 
@@ -27,8 +27,8 @@ def list_products():
             click.echo(f"Description: {product.description}")
             click.echo(f"Quantity: {product.quantity}")
             click.echo(f"Price: ${product.price}")
-            click.echo(f"Category: {product.category.name}")  # Assumes you have a Category model
-            click.echo(f"Supplier: {product.supplier.name}")  # Assumes you have a Supplier model
+            click.echo(f"Category: {product.category.name}")  
+            click.echo(f"Supplier: {product.supplier.name}")  
             click.echo("\n")
     else:
         click.echo("No products found in the inventory.")
@@ -44,8 +44,8 @@ def list_products():
 @click.option('--supplier', help='Product supplier')
 def add_product(name, description, quantity, price, category, supplier):
     """Add a new product to the inventory."""
-    # Create an SQLAlchemy engine and session (similar to list_products)
-    engine = create_engine('sqlite:///inventory.db')  # Change to your database connection
+    # Create an SQLAlchemy engine and session
+    engine = create_engine('sqlite:///inventory.db') 
     Session = sessionmaker(bind=engine)
     session = Session()
 

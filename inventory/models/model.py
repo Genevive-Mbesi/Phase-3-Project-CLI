@@ -11,6 +11,7 @@ class Category(Base):
     name = Column(String, nullable=False)
     products = relationship('Product', back_populates='category')
 
+
 class Product(Base):
     __tablename__ = 'products'
     
@@ -21,11 +22,16 @@ class Product(Base):
     price = Column(Integer, nullable=False)
     category_id = Column(Integer, ForeignKey('categories.id'))
     category = relationship('Category', back_populates='products')
-    supplier_id = Column(Integer, ForeignKey('suppliers.id'))
     
+    #  relationship with Supplier
+    supplier_id = Column(Integer, ForeignKey('suppliers.id'))
+    supplier = relationship('Supplier', back_populates='products')  
+
 class Supplier(Base):
     __tablename__ = 'suppliers'
     
     id = Column(Integer, primary_key=True)
     name = Column(String, nullable=False)
-    products_supplied = relationship('Product', back_populates='supplier')
+    
+    #  relationship with Product
+    products = relationship('Product', back_populates='supplier')  
