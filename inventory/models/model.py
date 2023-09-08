@@ -80,6 +80,23 @@ class Product(Base):
 
     def __str__(self):
         return self.name
+    
+    @classmethod
+    def delete_product(cls,product_id):
+        product=session.query(Product).filter_by(id = product_id).one()
+        session.delete(product)
+        session.commit()
+        
+    @classmethod
+    def update_product(cls,product_id,name,quantity,price):
+        product=session.query(Product).filter_by(id = product_id).one()
+        product.name=name
+        product.quantity=quantity
+        product.price=price
+        session.commit()
+
+    
+
 
 class Supplier(Base):
     __tablename__ = 'suppliers'

@@ -6,8 +6,6 @@ from inventory.models.model import Category, Product, Supplier, engine, session
 def cli():
     pass
 
-# No need to create the tables again; they are created in model.py
-# Base.metadata.create_all(engine)
 
 @cli.command()
 @click.option('--name', prompt='Category Name', help='Name of the category')
@@ -36,10 +34,22 @@ def create_product(name, description, quantity, price, category_id, supplier_id)
     product = Product.create(name, description, quantity, price, category, supplier)
     click.echo(f"Product '{product.name}' created with ID: {product.id}")
 
+@cli.command()
+@click.option('--product_id', prompt='Product id',type=int, help='Name of the product id')
+def delete_product(product_id):
+    Product.delete_product(product_id)
+
+@cli.command()
+@click.option('--product_id', prompt='Product id',type=int, help='Name of the product id')
+@click.option('--name', prompt='Product Name', help='Name of the product')
+@click.option('--quantity', prompt='Quantity', default=0, type=int, help='Quantity of the product')
+@click.option('--price', prompt='Price', type=int, help='Price of the product')
+def update_product(product_id,name,quantity,price):
+    Product.update_product(product_id,name,quantity,price) 
 
 @cli.command()
 def list_categories():
-    print("Inside list_categories function")  # Debugging line
+    print("Inside list_categories function")  
     categories = Category.list_categories()
     click.echo("Categories:")
     for category in categories:
